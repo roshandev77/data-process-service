@@ -5,10 +5,7 @@ import com.roshandev77.dataprocessservice.dao.IotDataDao;
 import com.roshandev77.dataprocessservice.model.IotData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sound.midi.Soundbank;
 
@@ -24,8 +21,14 @@ public class IotDataController {
 
     @PostMapping
     public ResponseEntity<Void> saveIotData(@RequestBody IotData iotData) {
-        System.out.println("Inside saveIotData" + iotData.getName());
+        System.out.println("Inside saveIotData" + iotData.getConnStatus().getClass().getName());
         iotDataDao.save(iotData);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+//    @PutMapping("/update")
+//    public ResponseEntity<Void> updateIotData(@RequestBody IotData iotData) {
+//
+//    }
+
 }

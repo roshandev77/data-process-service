@@ -16,6 +16,7 @@ public class IotDataDaoImple implements IotDataDao {
     @Transactional
     @Override
     public void save(IotData iotData) {
+        System.out.println("Object : " + iotData.getConnStatus());
         entityManager.persist(iotData);
     }
 }

@@ -1,10 +1,6 @@
 package com.roshandev77.dataprocessservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 @Entity
 public class IotData {
 
@@ -13,20 +9,70 @@ public class IotData {
     private long id;
 
     private String name;
+
+    @Column(unique = true)
     private String uId;
 
-    public IotData(String name, String uId) {
-        this.name = name;
-        this.uId = uId;
+    private String customerId;
+
+//    @Enumerated(EnumType.STRING)
+    private ConnectionStatus connStatus;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    public IotData() {}
+
+    public enum ConnectionStatus {
+        CONNECTED ,
+        DISCONNECTED
     }
 
-    public IotData() {
-
+    public Location getLocation() {
+        return location;
     }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+
+//    public IotData(String name, String uId, String connStatus, String customerId) {
+//        this.name = name;
+//        this.uId = uId;
+//        this.connStatus = connStatus;
+//    }
 
     public String getName() {
         return this.name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public ConnectionStatus getConnStatus() {
+        return connStatus;
+    }
+
+    public void setConnStatus(ConnectionStatus connStatus) {
+        this.connStatus = connStatus;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
 }
